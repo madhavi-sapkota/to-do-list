@@ -4,11 +4,15 @@ h1 {
 .list {
   border: 1px solid grey;
   padding: 10px;
-  margin: 200px;
+  margin: 300px;
+  margin-top: 20px;
   background-color: beige;
 }
 ul {
+  box-sizing: border-box;
   text-decoration: none;
+  padding: 10px;
+  border: 1px solid grey;
 }
 li {
   list-style-type: none;

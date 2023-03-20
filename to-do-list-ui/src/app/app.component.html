@@ -1,0 +1,8 @@
+<div class="list">
+  <h1>To-do List</h1>
+  <ul *ngFor="let todoitem of todos">
+    <li>{{ todoitem.id }}</li>
+    <li>{{ todoitem.task }}</li>
+    <li>{{ todoitem.isactive }}</li>
+  </ul>
+</div>
