@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class AppComponent {
   title = 'to-do-list-ui';
-  newText = '';
 
   todos = [
     { id: uuidv4(), task: 'first todo item', isActive: true },
@@ -30,8 +29,9 @@ export class AppComponent {
   }
 
   updateItem(id: string, target: any) {
-    console.log(id, target.value);
-    this.newText = target.value;
-    console.log(this.newText);
+    let index = this.todos.findIndex((item) => item.id === id);
+    this.todos[index].task = target.value;
+
+    console.log(this.todos[index]);
   }
 }
