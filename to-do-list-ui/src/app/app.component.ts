@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { v4 as uuidv4 } from 'uuid';
-// import  axios  from 'axios';
-// const baseURL= "http://localhost:3000/";
+import { TasksService } from './services/tasks.service';
 
 @Component({
   selector: 'app-root',
@@ -10,30 +8,20 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class AppComponent {
   title = 'to-do-list-ui';
+  todos: any[] = [];
 
-  todos = [
-    { id: uuidv4(), task: 'first todo item', isActive: true },
-    { id: uuidv4(), task: 'second todo item', isActive: true },
-    { id: uuidv4(), task: 'third todo item', isActive: true },
-    { id: uuidv4(), task: 'forth todo item', isActive: true },
-  ];
-  addNewTodo(newTodo: any) {
-    let todoNewItem = {
-      id: uuidv4(),
-      task: newTodo,
-      isActive: true,
-    };
-    this.todos.push(todoNewItem);
+  constructor(private tasksService: TasksService) {
+    tasksService.getAllTasks().subscribe((todos: any[]) => {
+      this.todos = todos;
+    });
   }
 
   deleteItem(id: string) {
-    this.todos = this.todos.filter((item) => item.id !== id);
+    this.tasksService.deleteTask(id);
   }
 
   updateItem(id: string, target: any) {
-    let index = this.todos.findIndex((item) => item.id === id);
-    this.todos[index].task = target.value;
-
-    console.log(this.todos[index]);
+    let updatedValue = target.value;
+    this.tasksService.updateTask(id, updatedValue);
   }
 }

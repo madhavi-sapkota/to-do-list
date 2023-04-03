@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AddtoDoComponent } from './Mycomponents/addto-do/addto-do.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, AddtoDoComponent],
@@ -16,6 +17,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FormsModule,
     BrowserAnimationsModule,
     MatSlideToggleModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

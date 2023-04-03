@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-addto-do',
@@ -7,9 +8,10 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class AddtoDoComponent {
   taskName = '';
-  @Output() newItemEvent = new EventEmitter();
+  constructor(private tasksService: TasksService) {}
+
   onClick() {
-    this.newItemEvent.emit(this.taskName);
+    this.tasksService.addTask(this.taskName);
     this.taskName = '';
   }
 }
