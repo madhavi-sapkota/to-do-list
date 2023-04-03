@@ -21,9 +21,7 @@ export class TasksService {
       .get<any[]>(`${API_BASE_URL}/to-do-items`)
       .subscribe((tasks) => {
         tasks.forEach((task) => {
-          if (this.todos.findIndex((item) => item.id === task.id) === -1) {
-            this.todos.unshift(task);
-          }
+          this.todos.push(task);
         });
       });
   }
@@ -31,18 +29,27 @@ export class TasksService {
   addTask(newTodo: string) {
     this.http
       .post(`${API_BASE_URL}/add-item`, { taskName: newTodo })
-      .subscribe(() => {
-        this.getAllTasksFromApi();
+      .subscribe((task) => {
+        this.todos.unshift(task);
       });
   }
 
   deleteTask(id: string) {
-    let index = this.todos.findIndex((item) => item.id === id);
-    this.todos.splice(index, 1);
+    this.http.post(`${API_BASE_URL}/delete-item`, { id: id }).subscribe(() => {
+      let index = this.todos.findIndex((task) => task.id === id);
+      this.todos.splice(index, 1);
+    });
   }
 
   updateTask(id: string, updatedTask: string) {
-    let index = this.todos.findIndex((item) => item.id === id);
-    this.todos[index].task = updatedTask;
+    this.http
+      .post(`${API_BASE_URL}/update-item`, {
+        id: id,
+        newTaskName: updatedTask,
+      })
+      .subscribe(() => {
+        let index = this.todos.findIndex((item) => item.id === id);
+        this.todos[index].task = updatedTask;
+      });
   }
 }

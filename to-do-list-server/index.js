@@ -22,13 +22,17 @@ app.get("/to-do-items", function (req, res) {
 
 app.post("/add-item", function (req, res) {
   let taskName = req.body.taskName;
+  if (!taskName) {
+    res.statusMessage = "taskName is not provided";
+    res.status(400).send();
+  }
   let todoNewItem = {
     id: uuidv4(),
     task: taskName,
     isActive: true,
   };
-  todos.push(todoNewItem);
-  res.status(200).send();
+  todos.unshift(todoNewItem);
+  res.send(todoNewItem);
 });
 
 app.post("/update-item", function (req, res) {
