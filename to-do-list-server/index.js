@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
 const { v4: uuidv4 } = require("uuid");
+const cors = require("cors");
 app.use(express.json());
+app.use(cors());
 
 let todos = [
   { id: "1", task: "first todo item", isActive: true },
@@ -11,7 +13,7 @@ let todos = [
 ];
 
 app.get("/", function (req, res) {
-  res.send("Hello World");
+  res.send("Hello Worlds");
 });
 
 app.get("/to-do-items", function (req, res) {
@@ -26,7 +28,7 @@ app.post("/add-item", function (req, res) {
     isActive: true,
   };
   todos.push(todoNewItem);
-  res.sendStatus(200);
+  res.status(200).send();
 });
 
 app.post("/update-item", function (req, res) {
@@ -34,13 +36,12 @@ app.post("/update-item", function (req, res) {
   let id = req.body.id;
   let index = todos.findIndex((item) => item.id == id);
   todos[index].task = newTaskName;
-
-  res.sendStatus(200);
+  res.status(200).send();
 });
 
 app.post("/delete-item", function (req, res) {
   let id = req.body.id;
   todos = todos.filter((item) => item.id !== id);
-  res.sendStatus(200);
+  res.status(200).send();
 });
 app.listen(3000);

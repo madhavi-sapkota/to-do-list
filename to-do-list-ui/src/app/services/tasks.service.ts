@@ -1,41 +1,48 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
+import { HttpClient } from '@angular/common/http';
 
-let todos = [
-  { id: uuidv4(), task: 'first todo item', isActive: true },
-  { id: uuidv4(), task: 'second todo item', isActive: true },
-  { id: uuidv4(), task: 'third todo item', isActive: true },
-  { id: uuidv4(), task: 'forth todo item', isActive: true },
-];
+const API_BASE_URL = 'http://localhost:3000';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TasksService {
-  constructor() {}
+  private todos: any[] = [];
+
+  constructor(private http: HttpClient) {}
 
   getAllTasks(): Observable<any[]> {
-    return of(todos);
+    return of(this.todos);
+  }
+
+  getAllTasksFromApi() {
+    return this.http
+      .get<any[]>(`${API_BASE_URL}/to-do-items`)
+      .subscribe((tasks) => {
+        tasks.forEach((task) => {
+          if (this.todos.findIndex((item) => item.id === task.id) === -1) {
+            this.todos.unshift(task);
+          }
+        });
+      });
   }
 
   addTask(newTodo: string) {
-    let todoNewItem = {
-      id: uuidv4(),
-      task: newTodo,
-      isActive: true,
-    };
-    todos.push(todoNewItem);
+    this.http
+      .post(`${API_BASE_URL}/add-item`, { taskName: newTodo })
+      .subscribe(() => {
+        this.getAllTasksFromApi();
+      });
   }
 
   deleteTask(id: string) {
-    let index = todos.findIndex((item) => item.id === id);
-    todos.splice(index, 1);
+    let index = this.todos.findIndex((item) => item.id === id);
+    this.todos.splice(index, 1);
   }
 
   updateTask(id: string, updatedTask: string) {
-    let index = todos.findIndex((item) => item.id === id);
-    todos[index].task = updatedTask;
-    console.log(todos);
+    let index = this.todos.findIndex((item) => item.id === id);
+    this.todos[index].task = updatedTask;
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TasksService } from './services/tasks.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { TasksService } from './services/tasks.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'to-do-list-ui';
   todos: any[] = [];
 
@@ -14,6 +14,10 @@ export class AppComponent {
     tasksService.getAllTasks().subscribe((todos: any[]) => {
       this.todos = todos;
     });
+  }
+
+  ngOnInit(): void {
+    this.tasksService.getAllTasksFromApi();
   }
 
   deleteItem(id: string) {
