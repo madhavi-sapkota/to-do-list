@@ -7,8 +7,10 @@
       [value]="todoitem.task"
       (keyup)="updateItem(todoitem.id, $event.target)"
     />
+    {{ todoitem.isActive }}
     <div class="btn">
       <button (click)="deleteItem(todoitem.id)">Delete</button>
+      <button (click)="markComplete(todoitem.id)">Mark Complete</button>
     </div>
   </div>
 

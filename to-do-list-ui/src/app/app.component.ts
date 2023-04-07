@@ -28,4 +28,8 @@ export class AppComponent implements OnInit {
     let updatedValue = target.value;
     this.tasksService.updateTask(id, updatedValue);
   }
+
+  markComplete(id: any) {
+    this.tasksService.markAsComplete(id);
+  }
 }

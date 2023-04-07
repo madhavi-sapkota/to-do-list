@@ -48,4 +48,12 @@ app.post("/delete-item", function (req, res) {
   todos = todos.filter((item) => item.id !== id);
   res.status(200).send();
 });
+
+app.post("/mark-complete", function (req, res) {
+  let id = req.body.id;
+  let index = todos.findIndex((item) => item.id === id);
+  todos[index].isActive = false;
+  res.status(200).send();
+});
+
 app.listen(3000);

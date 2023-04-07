@@ -52,4 +52,13 @@ export class TasksService {
         this.todos[index].task = updatedTask;
       });
   }
+
+  markAsComplete(id: any) {
+    this.http
+      .post(`${API_BASE_URL}/mark-complete`, { id: id })
+      .subscribe(() => {
+        let index = this.todos.findIndex((item) => item.id === id);
+        this.todos[index].isActive = false;
+      });
+  }
 }
