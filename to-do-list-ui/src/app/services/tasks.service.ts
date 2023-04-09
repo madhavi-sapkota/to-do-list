@@ -16,6 +16,10 @@ export class TasksService {
     return of(this.todos);
   }
 
+  getTaskById(id: string) {
+    return this.todos.find((item) => item.id === id);
+  }
+
   getAllTasksFromApi() {
     return this.http
       .get<any[]>(`${API_BASE_URL}/to-do-items`)
@@ -60,5 +64,12 @@ export class TasksService {
         let index = this.todos.findIndex((item) => item.id === id);
         this.todos[index].isActive = false;
       });
+  }
+
+  markAsActive(id: any) {
+    this.http.post(`${API_BASE_URL}/mark-active`, { id: id }).subscribe(() => {
+      let index = this.todos.findIndex((item) => item.id === id);
+      this.todos[index].isActive = true;
+    });
   }
 }

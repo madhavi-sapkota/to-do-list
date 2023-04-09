@@ -1,3 +1,12 @@
 div {
   text-align: center;
 }
+.add-task-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+.add-task-container :first-child {
+  margin-right: 20px;
+}

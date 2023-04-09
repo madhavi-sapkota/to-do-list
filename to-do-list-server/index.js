@@ -7,8 +7,8 @@ app.use(cors());
 
 let todos = [
   { id: "1", task: "first todo item", isActive: true },
-  { id: uuidv4(), task: "second todo item", isActive: true },
-  { id: uuidv4(), task: "third todo item", isActive: true },
+  { id: uuidv4(), task: "second todo item", isActive: false },
+  { id: uuidv4(), task: "third todo item", isActive: false },
   { id: uuidv4(), task: "forth todo item", isActive: true },
 ];
 
@@ -53,6 +53,13 @@ app.post("/mark-complete", function (req, res) {
   let id = req.body.id;
   let index = todos.findIndex((item) => item.id === id);
   todos[index].isActive = false;
+  res.status(200).send();
+});
+
+app.post("/mark-active", function (req, res) {
+  let id = req.body.id;
+  let index = todos.findIndex((item) => item.id === id);
+  todos[index].isActive = true;
   res.status(200).send();
 });
 

@@ -1,18 +1,81 @@
 <app-addto-do></app-addto-do>
-<div class="list">
-  <h1>To-do List</h1>
+<div class="tasks-list-container">
+  <mat-card
+    (drop)="handleDrop(true)"
+    (dragover)="handleDragOver($event)"
+    [class]="dropZoneClass"
+  >
+    <mat-card-header>To Dos</mat-card-header>
+    <mat-card-content>
+      <div class="item" *ngFor="let todoitem of activeTasks">
+        <mat-card
+          draggable="true"
+          class="grabbable"
+          (dragstart)="handleDragStart(todoitem.id)"
+          (dragend)="handleDragEnd()"
+        >
+          <mat-card-content class="task-actions-container">
+            {{ todoitem.task }}
+            <span class="task-actions">
+              <button
+                color="warn"
+                mat-icon-button
+                (click)="deleteItem(todoitem.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button
+                color="primary"
+                mat-icon-button
+                (click)="openEditDialog(todoitem.id)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-  <div class="item" *ngFor="let todoitem of todos">
-    <input
-      [value]="todoitem.task"
-      (keyup)="updateItem(todoitem.id, $event.target)"
-    />
-    {{ todoitem.isActive }}
-    <div class="btn">
-      <button (click)="deleteItem(todoitem.id)">Delete</button>
-      <button (click)="markComplete(todoitem.id)">Mark Complete</button>
-    </div>
-  </div>
+  <mat-card
+    (drop)="handleDrop(false)"
+    (dragover)="handleDragOver($event)"
+    droppable="true"
+    [class]="dropZoneClass"
+  >
+    <mat-card-header>Completed</mat-card-header>
+    <mat-card-content>
+      <div class="item" *ngFor="let todoitem of completedTasks">
+        <mat-card
+          draggable="true"
+          (dragstart)="handleDragStart(todoitem.id)"
+          (dragend)="handleDragEnd()"
+          class="grabbable"
+        >
+          <mat-card-content class="task-actions-container">
+            {{ todoitem.task }}
+            <span class="task-actions">
+              <button
+                color="warn"
+                mat-icon-button
+                (click)="deleteItem(todoitem.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button
+                color="primary"
+                mat-icon-button
+                (click)="openEditDialog(todoitem.id)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </span>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
   <h3 *ngIf="todos.length === 0">No to-do list to display</h3>
 </div>

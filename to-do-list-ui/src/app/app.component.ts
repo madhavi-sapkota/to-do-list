@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from './Mycomponents/edit-dialog/edit-dialog.component';
 import { TasksService } from './services/tasks.service';
 
 @Component({
@@ -9,10 +11,26 @@ import { TasksService } from './services/tasks.service';
 export class AppComponent implements OnInit {
   title = 'to-do-list-ui';
   todos: any[] = [];
+  taskBeingDraggedId: any = null;
+  dropZoneClass: string = '';
 
-  constructor(private tasksService: TasksService) {
+  constructor(private tasksService: TasksService, public dialog: MatDialog) {
     tasksService.getAllTasks().subscribe((todos: any[]) => {
       this.todos = todos;
+    });
+  }
+
+  get activeTasks() {
+    return this.todos.filter((x) => x.isActive);
+  }
+
+  get completedTasks() {
+    return this.todos.filter((x) => !x.isActive);
+  }
+
+  openEditDialog(id: string): void {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      data: { taskId: id },
     });
   }
 
@@ -31,5 +49,31 @@ export class AppComponent implements OnInit {
 
   markComplete(id: any) {
     this.tasksService.markAsComplete(id);
+  }
+
+  markActive(id: any) {
+    this.tasksService.markAsActive(id);
+  }
+
+  handleDragStart(id: string) {
+    let item = this.todos.find((x) => x.id === id);
+    this.taskBeingDraggedId = item.id;
+  }
+
+  handleDrop(isActive: boolean) {
+    if (isActive) {
+      this.tasksService.markAsActive(this.taskBeingDraggedId);
+    } else {
+      this.tasksService.markAsComplete(this.taskBeingDraggedId);
+    }
+  }
+
+  handleDragOver(event: any) {
+    this.dropZoneClass = 'drop-zone-active';
+    event.preventDefault();
+  }
+
+  handleDragEnd() {
+    this.dropZoneClass = '';
   }
 }
