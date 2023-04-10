@@ -29,6 +29,11 @@ export class AppComponent implements OnInit {
       this.tasksService.deleteTask(task.id);
     });
   }
+  allTasksToBeCompleted() {
+    this.activeTasks.forEach((task) => {
+      this.tasksService.markAsComplete(task.id);
+    });
+  }
 
   get activeTasks() {
     return this.todos.filter((x) => x.isActive);

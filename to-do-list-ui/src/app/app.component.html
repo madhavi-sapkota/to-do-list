@@ -6,6 +6,17 @@
     [class]="dropZoneClass"
   >
     <mat-card-header>To-dos</mat-card-header>
+    <mat-card-actions>
+      <div class="actionButtonsTop">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="allTasksToBeCompleted()"
+        >
+          All Completed
+        </button>
+      </div>
+    </mat-card-actions>
     <mat-card-content>
       <div class="item" *ngFor="let todoitem of activeTasks">
         <mat-card
@@ -46,13 +57,13 @@
   >
     <mat-card-header>Completed</mat-card-header>
     <mat-card-actions>
-      <div class="deleteAllButton">
+      <div class="actionButtonsTop">
         <button
           mat-raised-button
           color="warn"
           (click)="completedTaskToBeDeleted()"
         >
-          Delete All
+          Clear Completed
         </button>
       </div>
     </mat-card-actions>
@@ -88,5 +99,5 @@
     </mat-card-content>
   </mat-card>
 
-  <h3 *ngIf="todos.length === 0">No to-do list to display</h3>
+  <!-- <h3 *ngIf="todos.length === 0">No to-do list to display</h3> -->
 </div>
