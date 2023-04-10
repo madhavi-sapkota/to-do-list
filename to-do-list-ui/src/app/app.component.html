@@ -5,7 +5,7 @@
     (dragover)="handleDragOver($event)"
     [class]="dropZoneClass"
   >
-    <mat-card-header>To Dos</mat-card-header>
+    <mat-card-header>To-dos</mat-card-header>
     <mat-card-content>
       <div class="item" *ngFor="let todoitem of activeTasks">
         <mat-card
@@ -45,6 +45,17 @@
     [class]="dropZoneClass"
   >
     <mat-card-header>Completed</mat-card-header>
+    <mat-card-actions>
+      <div class="deleteAllButton">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="completedTaskToBeDeleted()"
+        >
+          Delete All
+        </button>
+      </div>
+    </mat-card-actions>
     <mat-card-content>
       <div class="item" *ngFor="let todoitem of completedTasks">
         <mat-card

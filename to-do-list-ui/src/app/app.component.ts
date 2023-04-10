@@ -19,6 +19,16 @@ export class AppComponent implements OnInit {
       this.todos = todos;
     });
   }
+  completedTaskToBeDeleted() {
+    // let allCompletedTasks = this.completedTasks;
+    // for (var i = 0; i < allCompletedTasks.length; i++) {
+    //   this.tasksService.deleteTask(allCompletedTasks[i].id);
+    // }
+
+    this.completedTasks.forEach((task) => {
+      this.tasksService.deleteTask(task.id);
+    });
+  }
 
   get activeTasks() {
     return this.todos.filter((x) => x.isActive);

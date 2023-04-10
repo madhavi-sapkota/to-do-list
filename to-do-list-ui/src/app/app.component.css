@@ -48,3 +48,9 @@ p {
 .drop-zone-active {
   border: 1px dotted blue;
 }
+
+.deleteAllButton {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
