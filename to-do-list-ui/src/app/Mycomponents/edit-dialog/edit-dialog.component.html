@@ -1,6 +1,15 @@
 <div class="edit-dialog">
-  <h1>Edit Task {{ taskName }}</h1>
+  <h1>Edit Task</h1>
   <mat-form-field class="example-full-width">
-    <input matInput type="text" value="euta task name" />
+    <input matInput type="text" [(ngModel)]="taskName" />
   </mat-form-field>
+  <br />
+  <button
+    class="addButton"
+    mat-raised-button
+    color="primary"
+    (click)="updateTask()"
+  >
+    Update
+  </button>
 </div>

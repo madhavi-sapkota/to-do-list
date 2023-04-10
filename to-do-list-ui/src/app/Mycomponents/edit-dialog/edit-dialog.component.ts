@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TasksService } from 'src/app/services/tasks.service';
 
-export interface DialogData {
+export interface EditDialogData {
   taskId: string;
 }
 
@@ -16,10 +16,15 @@ export class EditDialogComponent {
   constructor(
     private tasksService: TasksService,
     public dialogRef: MatDialogRef<EditDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public editDialogData: EditDialogData
   ) {}
 
   ngOnInit(): void {
-    this.taskName = this.tasksService.getTaskById(this.data.taskId).task;
+    let taskId = this.editDialogData.taskId;
+    this.taskName = this.tasksService.getTaskById(taskId).task;
+  }
+  updateTask() {
+    this.tasksService.updateTask(this.editDialogData.taskId, this.taskName);
+    this.dialogRef.close();
   }
 }

@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
   }
 
   openEditDialog(id: string): void {
-    const dialogRef = this.dialog.open(EditDialogComponent, {
+    this.dialog.open(EditDialogComponent, {
       data: { taskId: id },
     });
   }

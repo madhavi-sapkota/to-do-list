@@ -1,3 +1,9 @@
 .edit-dialog {
   padding: 20px;
+  height: 200px;
+}
+.addButton {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
 }
