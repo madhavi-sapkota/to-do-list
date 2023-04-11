@@ -6,10 +6,25 @@ app.use(express.json());
 app.use(cors());
 
 let todos = [
-  { id: "1", task: "first todo item", isActive: true },
-  { id: uuidv4(), task: "second todo item", isActive: false },
-  { id: uuidv4(), task: "third todo item", isActive: false },
-  { id: uuidv4(), task: "forth todo item", isActive: true },
+  { id: "1", task: "first todo item", dueDate: new Date(), isActive: true },
+  {
+    id: uuidv4(),
+    task: "second todo item",
+    dueDate: new Date(),
+    isActive: false,
+  },
+  {
+    id: uuidv4(),
+    task: "third todo item",
+    dueDate: new Date(),
+    isActive: false,
+  },
+  {
+    id: uuidv4(),
+    task: "forth todo item",
+    dueDate: new Date(),
+    isActive: true,
+  },
 ];
 
 app.get("/", function (req, res) {
@@ -22,6 +37,7 @@ app.get("/to-do-items", function (req, res) {
 
 app.post("/add-item", function (req, res) {
   let taskName = req.body.taskName;
+  let dueDate = req.body.dueDate;
   if (!taskName) {
     res.statusMessage = "taskName is not provided";
     res.status(400).send();
@@ -29,6 +45,7 @@ app.post("/add-item", function (req, res) {
   let todoNewItem = {
     id: uuidv4(),
     task: taskName,
+    dueDate: dueDate,
     isActive: true,
   };
   todos.unshift(todoNewItem);

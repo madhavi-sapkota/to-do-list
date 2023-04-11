@@ -1,0 +1,26 @@
+<div class="add-dialog">
+  <h1>Add Task</h1>
+  <mat-form-field class="example-full-width">
+    <input required matInput type="text" [(ngModel)]="taskName" />
+  </mat-form-field>
+  <br />
+
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input required matInput [matDatepicker]="picker" [(ngModel)]="dueDate" />
+    <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <br />
+  <br />
+
+  <button
+    class="addButton"
+    mat-raised-button
+    color="primary"
+    (click)="addTask()"
+    [disabled]="!(dueDate && taskName.trim() !== '')"
+  >
+    Add
+  </button>
+</div>

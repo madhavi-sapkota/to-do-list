@@ -30,9 +30,9 @@ export class TasksService {
       });
   }
 
-  addTask(newTodo: string) {
+  addTask(newTodo: string, dueDate: any) {
     this.http
-      .post(`${API_BASE_URL}/add-item`, { taskName: newTodo })
+      .post(`${API_BASE_URL}/add-item`, { taskName: newTodo, dueDate: dueDate })
       .subscribe((task) => {
         this.todos.unshift(task);
       });

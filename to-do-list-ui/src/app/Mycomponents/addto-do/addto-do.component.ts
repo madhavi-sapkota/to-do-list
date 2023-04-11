@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { TasksService } from '../../services/tasks.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
 @Component({
   selector: 'app-addto-do',
@@ -7,11 +8,9 @@ import { TasksService } from '../../services/tasks.service';
   styleUrls: ['./addto-do.component.css'],
 })
 export class AddtoDoComponent {
-  taskName = '';
-  constructor(private tasksService: TasksService) {}
+  constructor(public dialog: MatDialog) {}
 
-  onClick() {
-    this.tasksService.addTask(this.taskName);
-    this.taskName = '';
+  openAddDialog(): void {
+    this.dialog.open(AddDialogComponent);
   }
 }

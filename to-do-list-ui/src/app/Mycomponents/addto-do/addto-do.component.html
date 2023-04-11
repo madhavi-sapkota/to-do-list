@@ -1,5 +1,5 @@
 <div>
-  <div class="add-task-container">
+  <!-- <div class="add-task-container">
     <mat-form-field style="margin-bottom: -20px">
       <mat-label>Add Task</mat-label>
       <input
@@ -9,7 +9,11 @@
         [(ngModel)]="taskName"
         (keyup.enter)="onClick()"
       />
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="onClick()">Add</button>
-  </div>
+    </mat-form-field> -->
+
+  <button mat-fab color="primary" (click)="openAddDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>
+<!-- </div> -->
+

@@ -14,9 +14,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AddDialogComponent } from './Mycomponents/add-dialog/add-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
 @NgModule({
-  declarations: [AppComponent, AddtoDoComponent, EditDialogComponent],
+  declarations: [
+    AppComponent,
+    AddtoDoComponent,
+    EditDialogComponent,
+    AddDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,6 +37,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatCardModule,
     MatIconModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRippleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
