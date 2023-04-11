@@ -18,7 +18,7 @@
       </div>
     </mat-card-actions>
     <mat-card-content>
-      <div class="item" *ngFor="let todoitem of activeTasks">
+      <div class="item" *ngFor="let todoitem of activeTasks" class="hoverCard">
         <mat-card
           draggable="true"
           class="grabbable"
@@ -27,7 +27,7 @@
         >
           <mat-card-content class="task-actions-container">
             {{ todoitem.task }}
-            <span class="task-actions">
+            <span class="task-actions" class="input-edit">
               <button
                 color="warn"
                 mat-icon-button
@@ -68,7 +68,11 @@
       </div>
     </mat-card-actions>
     <mat-card-content>
-      <div class="item" *ngFor="let todoitem of completedTasks">
+      <div
+        class="item"
+        *ngFor="let todoitem of completedTasks"
+        class="hoverCard"
+      >
         <mat-card
           draggable="true"
           (dragstart)="handleDragStart(todoitem.id)"
@@ -77,7 +81,7 @@
         >
           <mat-card-content class="task-actions-container">
             {{ todoitem.task }}
-            <span class="task-actions">
+            <span class="task-actions" class="input-edit">
               <button
                 color="warn"
                 mat-icon-button

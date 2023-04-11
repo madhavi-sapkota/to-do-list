@@ -54,3 +54,13 @@ p {
   right: 0;
   margin-right: 20px;
 }
+.input-edit {
+  opacity: 0;
+}
+
+.hoverCard:hover .input-edit {
+  opacity: 1;
+}
+.hoverCard {
+  padding: 5px;
+}
