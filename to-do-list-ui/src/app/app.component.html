@@ -11,6 +11,7 @@
           mat-raised-button
           color="primary"
           (click)="allTasksToBeCompleted()"
+          [hidden]="activeTasks.length === 0"
         >
           Complete All
         </button>
@@ -23,9 +24,14 @@
           class="grabbable"
           (dragstart)="handleDragStart(todoitem.id)"
           (dragend)="handleDragEnd()"
+          [class]="getCssClass(todoitem.id)" 
+          
         >
-          <mat-card-content class="task-actions-container">
+        <mat-card-content class="task-actions-container">
+          <div>
             {{ todoitem.task }}
+            <app-humanized-date [date]="todoitem.dueDate" />
+          </div>
             <span class="task-actions" class="input-edit">
               <button
                 color="warn"
@@ -61,6 +67,7 @@
           mat-raised-button
           color="warn"
           (click)="completedTaskToBeDeleted()"
+          [hidden]="completedTasks.length === 0"
         >
           Clear All
         </button>
@@ -79,7 +86,10 @@
           class="grabbable"
         >
           <mat-card-content class="task-actions-container">
-            {{ todoitem.task }}
+            <div>
+              {{ todoitem.task }}
+              <app-humanized-date [date]="todoitem.dueDate" />
+            </div>
             <span class="task-actions" class="input-edit">
               <button
                 color="warn"
@@ -101,8 +111,6 @@
       </div>
     </mat-card-content>
   </mat-card>
-
-  <!-- <h3 *ngIf="todos.length === 0">No to-do list to display</h3> -->
 </div>
 
 <app-addto-do></app-addto-do>

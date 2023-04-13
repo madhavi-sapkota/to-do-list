@@ -10,3 +10,9 @@ div {
 .add-task-container :first-child {
   margin-right: 20px;
 }
+button {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  color: "primary";
+}

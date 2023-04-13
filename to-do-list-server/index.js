@@ -55,8 +55,10 @@ app.post("/add-item", function (req, res) {
 app.post("/update-item", function (req, res) {
   let newTaskName = req.body.newTaskName;
   let id = req.body.id;
+  let newDueDate = req.body.newDueDate;
   let index = todos.findIndex((item) => item.id == id);
   todos[index].task = newTaskName;
+  todos[index].dueDate = newDueDate;
   res.status(200).send();
 });
 

@@ -13,6 +13,7 @@ export interface EditDialogData {
 })
 export class EditDialogComponent {
   taskName = '';
+  dueDate: any;
   constructor(
     private tasksService: TasksService,
     public dialogRef: MatDialogRef<EditDialogComponent>,
@@ -21,10 +22,16 @@ export class EditDialogComponent {
 
   ngOnInit(): void {
     let taskId = this.editDialogData.taskId;
-    this.taskName = this.tasksService.getTaskById(taskId).task;
+    let task = this.tasksService.getTaskById(taskId);
+    this.taskName = task.task;
+    this.dueDate = task.dueDate;
   }
   updateTask() {
-    this.tasksService.updateTask(this.editDialogData.taskId, this.taskName);
+    this.tasksService.updateTask(
+      this.editDialogData.taskId,
+      this.taskName,
+      this.dueDate
+    );
     this.dialogRef.close();
   }
 }

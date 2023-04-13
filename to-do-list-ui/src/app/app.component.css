@@ -64,3 +64,9 @@ p {
 .hoverCard {
   padding: 5px;
 }
+.due-date-passed {
+  border: 1px red solid;
+}
+.due-date-approaching {
+  border: 1px orange solid;
+}

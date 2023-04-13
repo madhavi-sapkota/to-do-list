@@ -17,7 +17,6 @@ export class AddDialogComponent {
 
   addTask() {
     this.tasksService.addTask(this.taskName.trim(), this.dueDate);
-
     this.dialogRef.close();
   }
 }

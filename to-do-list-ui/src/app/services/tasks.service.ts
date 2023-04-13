@@ -45,15 +45,17 @@ export class TasksService {
     });
   }
 
-  updateTask(id: string, updatedTask: string) {
+  updateTask(id: string, updatedTask: string, updatedDate: any) {
     this.http
       .post(`${API_BASE_URL}/update-item`, {
         id: id,
         newTaskName: updatedTask,
+        newDueDate: updatedDate,
       })
       .subscribe(() => {
         let index = this.todos.findIndex((item) => item.id === id);
         this.todos[index].task = updatedTask;
+        this.todos[index].dueDate = updatedDate;
       });
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from './Mycomponents/edit-dialog/edit-dialog.component';
 import { TasksService } from './services/tasks.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -36,7 +37,10 @@ export class AppComponent implements OnInit {
   }
 
   get activeTasks() {
-    return this.todos.filter((x) => x.isActive);
+    let value = this.todos.filter((x) => x.isActive);
+    return value.sort(function (a, b) {
+      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+    });
   }
 
   get completedTasks() {
@@ -55,11 +59,6 @@ export class AppComponent implements OnInit {
 
   deleteItem(id: string) {
     this.tasksService.deleteTask(id);
-  }
-
-  updateItem(id: string, target: any) {
-    let updatedValue = target.value;
-    this.tasksService.updateTask(id, updatedValue);
   }
 
   markComplete(id: any) {
@@ -90,5 +89,21 @@ export class AppComponent implements OnInit {
 
   handleDragEnd() {
     this.dropZoneClass = '';
+  }
+
+  getCssClass(id: string) {
+    let currentDate = moment(new Date()).utc(false);
+    let dueDate = moment(
+      new Date(this.todos.find((x) => x.id === id).dueDate)
+    ).utc(true);
+    console.log('currentDate', currentDate);
+    console.log('dueDate', dueDate);
+    if (currentDate > dueDate) {
+      return 'due-date-passed';
+    } else if (dueDate.diff(currentDate, 'days') <= 2) {
+      return 'due-date-approaching';
+    } else {
+      return '';
+    }
   }
 }
