@@ -18,6 +18,7 @@ import { AddDialogComponent } from './Mycomponents/add-dialog/add-dialog.compone
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { HumanizedDateComponent } from './Mycomponents/humanized-date/humanized-date.component';
+import { TaskComponent } from './Mycomponents/task/task.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HumanizedDateComponent } from './Mycomponents/humanized-date/humanized-
     EditDialogComponent,
     AddDialogComponent,
     HumanizedDateComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,

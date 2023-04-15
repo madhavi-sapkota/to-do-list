@@ -19,37 +19,11 @@
     </mat-card-actions>
     <mat-card-content>
       <div class="item" *ngFor="let todoitem of activeTasks" class="hoverCard">
-        <mat-card
-          draggable="true"
-          class="grabbable"
-          (dragstart)="handleDragStart(todoitem.id)"
-          (dragend)="handleDragEnd()"
-          [class]="getCssClass(todoitem.id)" 
-          
-        >
-        <mat-card-content class="task-actions-container">
-          <div>
-            {{ todoitem.task }}
-            <app-humanized-date [date]="todoitem.dueDate" />
-          </div>
-            <span class="task-actions" class="input-edit">
-              <button
-                color="warn"
-                mat-icon-button
-                (click)="deleteItem(todoitem.id)"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-              <button
-                color="primary"
-                mat-icon-button
-                (click)="openEditDialog(todoitem.id)"
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-            </span>
-          </mat-card-content>
-        </mat-card>
+        <app-task
+          [task]="todoitem"
+          (handleDragStarted)="handleDragStart($event)"
+          (handleDragEnded)="handleDragEnd()"
+        ></app-task>
       </div>
     </mat-card-content>
   </mat-card>
@@ -79,35 +53,11 @@
         *ngFor="let todoitem of completedTasks"
         class="hoverCard"
       >
-        <mat-card
-          draggable="true"
-          (dragstart)="handleDragStart(todoitem.id)"
-          (dragend)="handleDragEnd()"
-          class="grabbable"
-        >
-          <mat-card-content class="task-actions-container">
-            <div>
-              {{ todoitem.task }}
-              <app-humanized-date [date]="todoitem.dueDate" />
-            </div>
-            <span class="task-actions" class="input-edit">
-              <button
-                color="warn"
-                mat-icon-button
-                (click)="deleteItem(todoitem.id)"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-              <button
-                color="primary"
-                mat-icon-button
-                (click)="openEditDialog(todoitem.id)"
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
-            </span>
-          </mat-card-content>
-        </mat-card>
+        <app-task
+          [task]="todoitem"
+          (handleDragStarted)="handleDragStart($event)"
+          (handleDragEnded)="handleDragEnd()"
+        ></app-task>
       </div>
     </mat-card-content>
   </mat-card>

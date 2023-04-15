@@ -1,0 +1,32 @@
+<mat-card
+draggable="true"
+class="grabbable"
+(dragstart)="handleDragStart(task.id)"
+(dragend)="handleDragEnd()"
+[class]="getCssClass()" 
+
+>
+<mat-card-content class="task-actions-container">
+<div>
+  {{ task.task }}
+  <app-humanized-date [date]="task.dueDate" />
+</div>
+  <span class="input-edit">
+    <button
+      color="warn"
+      mat-icon-button
+      (click)="deleteItem()"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <button
+      color="primary"
+      mat-icon-button
+      (click)="openEditDialog()"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+  </span>
+</mat-card-content>
+</mat-card>
+
