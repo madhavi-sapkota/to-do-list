@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { EditDialogComponent } from '../../Mycomponents/edit-dialog/edit-dialog.component';
-import { TasksService } from '../../services/tasks.service';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { TasksService } from '../../../../services/tasks.service';
 import * as moment from 'moment';
 
 @Component({

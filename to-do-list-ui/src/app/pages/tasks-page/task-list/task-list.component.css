@@ -1,0 +1,72 @@
+h1 {
+  text-align: center;
+}
+
+.item {
+  padding: 10px;
+}
+
+p {
+  text-align: center;
+}
+.btn {
+  text-align: right;
+}
+
+.task-actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tasks-list-container {
+  display: flex;
+  justify-content: center;
+}
+
+.tasks-list-container > * {
+  flex-grow: 1;
+  flex: 1;
+  margin: 10px;
+  background-color: lightgrey;
+}
+
+.grabbable {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.drop-zone-active {
+  border: 1px dotted blue;
+}
+
+.actionButtonsTop {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+.input-edit {
+  opacity: 0;
+}
+
+.hoverCard:hover .input-edit {
+  opacity: 1;
+}
+.hoverCard {
+  padding: 5px;
+}
+.due-date-passed {
+  border: 1px red solid;
+}
+.due-date-approaching {
+  border: 1px orange solid;
+}

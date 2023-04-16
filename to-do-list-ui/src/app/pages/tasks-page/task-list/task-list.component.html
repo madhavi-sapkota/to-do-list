@@ -1,0 +1,66 @@
+<div class="tasks-list-container">
+  <mat-card
+    (drop)="handleDrop(true)"
+    (dragover)="handleDragOver($event)"
+    [class]="dropZoneClass"
+  >
+    <mat-card-header>To-dos</mat-card-header>
+    <mat-card-actions>
+      <div class="actionButtonsTop">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="completeAllTasks()"
+          [hidden]="activeTasks.length === 0"
+        >
+          Complete All
+        </button>
+      </div>
+    </mat-card-actions>
+    <mat-card-content>
+      <div class="item" *ngFor="let todoitem of activeTasks" class="hoverCard">
+        <app-task
+          [task]="todoitem"
+          (handleDragStarted)="handleDragStart($event)"
+          (handleDragEnded)="handleDragEnd()"
+        ></app-task>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card
+    (drop)="handleDrop(false)"
+    (dragover)="handleDragOver($event)"
+    droppable="true"
+    [class]="dropZoneClass"
+  >
+    <mat-card-header>Completed</mat-card-header>
+    <mat-card-actions>
+      <div class="actionButtonsTop">
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="deleteAllCompleted()"
+          [hidden]="completedTasks.length === 0"
+        >
+          Clear All
+        </button>
+      </div>
+    </mat-card-actions>
+    <mat-card-content>
+      <div
+        class="item"
+        *ngFor="let todoitem of completedTasks"
+        class="hoverCard"
+      >
+        <app-task
+          [task]="todoitem"
+          (handleDragStarted)="handleDragStart($event)"
+          (handleDragEnded)="handleDragEnd()"
+        ></app-task>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<app-addto-do></app-addto-do>
