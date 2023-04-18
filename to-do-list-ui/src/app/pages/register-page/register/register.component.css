@@ -1,0 +1,20 @@
+mat-card {
+  margin-right: 50%;
+  margin-left: 50%;
+  padding: 54px;
+  margin-bottom: 77px;
+  text-align: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+mat-card-title {
+  text-align: center;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.existing-account {
+  margin-top: 27px;
+}

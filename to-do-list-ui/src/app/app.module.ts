@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,8 @@ import { TaskListComponent } from './pages/tasks-page/task-list/task-list.compon
 import { TasksPageComponent } from './pages/tasks-page/tasks-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { LoginComponent } from './pages/login-page/login/login.component';
+import { RegisterComponent } from './pages/register-page/register/register.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     TasksPageComponent,
     RegisterPageComponent,
     LoginPageComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRippleModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
