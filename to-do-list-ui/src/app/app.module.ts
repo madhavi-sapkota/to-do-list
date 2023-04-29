@@ -8,7 +8,7 @@ import { AddtoDoComponent } from './pages/tasks-page/task-list/addto-do/addto-do
 import { EditDialogComponent } from './pages/tasks-page/task-list/task/edit-dialog/edit-dialog.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
@@ -25,6 +25,10 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginComponent } from './pages/login-page/login/login.component';
 import { RegisterComponent } from './pages/register-page/register/register.component';
+import { TokenAuthorizationService } from './services/token-authorization.service';
+import { CookieService } from 'ngx-cookie-service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { SignOutComponent } from './pages/tasks-page/sign-out/sign-out.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +44,7 @@ import { RegisterComponent } from './pages/register-page/register/register.compo
     LoginPageComponent,
     LoginComponent,
     RegisterComponent,
+    SignOutComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +62,16 @@ import { RegisterComponent } from './pages/register-page/register/register.compo
     MatNativeDateModule,
     MatRippleModule,
     ReactiveFormsModule,
+    MatToolbarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenAuthorizationService,
+      multi: true,
+    },
+    CookieService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

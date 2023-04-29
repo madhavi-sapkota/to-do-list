@@ -14,6 +14,9 @@ const verifyUserToken = (req, res, next) => {
     req.user = decoded.user;
     next();
   } catch (err) {
+    if (err instanceof jwt.TokenExpiredError) {
+      return res.status(401).send("Token Expired");
+    }
     console.log(err);
     res.status(400).send("Invalid token.");
   }

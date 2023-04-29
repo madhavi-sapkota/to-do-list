@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 const API_BASE_URL = 'http://localhost:3000';
 
@@ -7,7 +9,11 @@ const API_BASE_URL = 'http://localhost:3000';
   providedIn: 'root',
 })
 export class UserServicesService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private cookieService: CookieService
+  ) {}
 
   registerUser(userEmail: any, userPassword: any) {
     this.http
@@ -28,9 +34,15 @@ export class UserServicesService {
         email: userEmail,
         password: userPassword,
       })
-      .subscribe((res) => {
-        console.log(res);
-        alert('user logged in successfully');
+      .subscribe((res: any) => {
+        let bearerToken = `Bearer ${res.token}`;
+        this.cookieService.set('bearer-token', bearerToken);
+        this.router.navigate(['tasks']);
       });
+  }
+
+  logoutUser() {
+    this.cookieService.deleteAll();
+    this.router.navigate(['login']);
   }
 }

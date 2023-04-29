@@ -8,6 +8,9 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { verifyUserToken } = require("./middlewares/authentication-middleware");
+const { MongoClient } = require("mongodb");
+var url = "mongodb://127.0.0.1:27017/tasks-to-do";
+const client = new MongoClient(url);
 
 let users = [];
 
@@ -18,6 +21,11 @@ const {
   deleteTask,
   updateIsActive,
 } = require("./respositories/task-repository");
+
+const {
+  registerUser,
+  getUserByEmail,
+} = require("./respositories/user-repository");
 
 app.get("/", function (req, res) {
   res.send("Hello World");
@@ -78,24 +86,21 @@ app.post("/register", async (req, res) => {
   }
   const hash = await bcrypt.hash(user.password, 10);
   user.password = hash;
-  users.push(user);
+  // users.push(user);
+  await registerUser(user);
   res.status(200).send();
 });
 
 app.post("/login", async (req, res) => {
-  const userEmailAddress = req.body.email;
-  const userPassword = req.body.password;
+  const email = req.body.email;
+  const password = req.body.password;
 
-  //check if user exists
-  const foundUser = users.find((user) => user.email === userEmailAddress);
+  let foundUser = await getUserByEmail(email);
   if (!foundUser) {
     return res.status(400).send("Invalid email or password");
   }
-  //check if password is correct
-  const isPasswordValid = await bcrypt.compare(
-    userPassword,
-    foundUser.password
-  );
+  // check if password is correct
+  const isPasswordValid = await bcrypt.compare(password, foundUser.password);
   if (!isPasswordValid) {
     return res.status(400).send("Invalid email or password");
   }

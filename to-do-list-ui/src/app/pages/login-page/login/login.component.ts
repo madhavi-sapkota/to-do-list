@@ -8,9 +8,6 @@ import { UserServicesService } from 'src/app/services/user-services.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  userEmail = '';
-  userPassword: any;
-
   constructor(private userServiceServices: UserServicesService) {}
 
   form: FormGroup = new FormGroup({
@@ -19,6 +16,9 @@ export class LoginComponent {
   });
 
   submit() {
-    this.userServiceServices.loginUser(this.userEmail, this.userPassword);
+    this.userServiceServices.loginUser(
+      this.form.get('username')?.value,
+      this.form.get('password')?.value
+    );
   }
 }
