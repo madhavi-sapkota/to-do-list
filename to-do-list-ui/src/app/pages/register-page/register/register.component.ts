@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserServicesService } from 'src/app/services/user-services.service';
+import { matchpassword } from './matchpassword.validator';
 
 @Component({
   selector: 'app-register',
@@ -10,16 +11,20 @@ import { UserServicesService } from 'src/app/services/user-services.service';
 export class RegisterComponent {
   userEmail = '';
   userPassword: any;
-  confirmPasword: any;
+  confirmPassword: any;
 
   constructor(private userServiceServices: UserServicesService) {}
 
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-    confirmPasword: new FormControl(''),
-  });
-
+  registrationForm: FormGroup = new FormGroup(
+    {
+      username: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null),
+    },
+    {
+      validators: matchpassword,
+    }
+  );
   submit() {
     this.userServiceServices.registerUser(this.userEmail, this.userPassword);
   }

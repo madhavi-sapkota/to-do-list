@@ -2,9 +2,13 @@ const { MongoClient } = require("mongodb");
 var url = "mongodb://127.0.0.1:27017/tasks-to-do";
 const client = new MongoClient(url);
 
-async function getAllTasks() {
+async function getAllTasks(userId) {
   let connection = await client.connect();
-  let tasks = await connection.db().collection("tasks").find({}).toArray();
+  let tasks = await connection
+    .db()
+    .collection("tasks")
+    .find({ userId: userId })
+    .toArray();
   return tasks;
 }
 

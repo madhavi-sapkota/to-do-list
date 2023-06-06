@@ -32,7 +32,8 @@ app.get("/", function (req, res) {
 });
 
 app.get("/to-do-items", verifyUserToken, async function (req, res) {
-  tasks = await getAllTasks();
+  let userId = req.userId,
+    tasks = await getAllTasks(userId);
   res.send(tasks);
 });
 
@@ -44,6 +45,7 @@ app.post("/add-item", verifyUserToken, async function (req, res) {
     return res.status(400).send();
   }
   let todoNewItem = {
+    userId: req.userId,
     id: uuidv4(),
     task: taskName,
     dueDate: dueDate,
@@ -86,7 +88,7 @@ app.post("/register", async (req, res) => {
   }
   const hash = await bcrypt.hash(user.password, 10);
   user.password = hash;
-  // users.push(user);
+  user.id = uuidv4();
   await registerUser(user);
   res.status(200).send();
 });
